@@ -1,0 +1,33 @@
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  application:
+    name: backend_core
+  jpa:
+    hibernate:
+        ddl-auto: none
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/mobishare
+    username: core_backend
+    password: core_backend
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 9000
+
+springdoc:
+  api-docs:
+    path: /api-docs
+
+mqtt:
+  addr: 0.0.0.0
+  port: 1883
+  clientID: "core_backend"

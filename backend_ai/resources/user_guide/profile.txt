@@ -1,0 +1,5 @@
+Guide to see the personal information of a MobiShare user.
+Go to the profile section of the app (button right-end in the navigation stripe at the bottom of the screen).
+You will see your profile picture.
+Inside this section, you will find a button "Informazioni Personali" which allows you to display your personal information.
+To logout from your account, you can use the "Esci" button located at the bottom of the profile section.

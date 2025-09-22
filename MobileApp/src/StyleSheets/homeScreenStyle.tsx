@@ -1,0 +1,102 @@
+import {StyleSheet} from "react-native";
+
+export const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#FAF8FF',
+    },
+    header: {
+        fontSize: 24,
+        fontWeight: '600',
+        marginTop: 20,
+        marginLeft: 20,
+        color: '#666',
+    },
+    searchBox: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        margin: 20,
+        backgroundColor: '#f3f3f3',
+        borderRadius: 12,
+        padding: 10,
+        marginTop: 40,
+    },
+    icon: { marginRight: 10 },
+    searchTextContainer: { flex: 1 },
+    location: { fontWeight: '600', fontSize: 14 },
+    category: { color: '#999', fontSize: 12 },
+    filters: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginHorizontal: 20,
+        marginBottom: 10,
+    },
+    filterButton: {
+        backgroundColor: '#fff',
+        paddingHorizontal: 12,
+        paddingVertical: 6,
+        borderRadius: 8,
+        marginRight: 10,
+        shadowColor: '#000',
+        shadowOpacity: 0.06,
+        shadowRadius: 6,
+        shadowOffset: { width: 0, height: 2 },
+        elevation: 2,
+
+    },
+    results: { marginLeft: 'auto', color: '#555' },
+    map: { flex: 1 },
+    priceTag: {
+        width: 40,
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'rgba(255, 0, 0, 0.3)',
+    },
+    priceText: {
+        color: '#fff',
+        fontWeight: '600',
+        fontSize: 12,
+    },
+    modalOverlay: {
+        position: 'absolute',
+        top: 0, left: 0, right: 0, bottom: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    modalContainer: {
+        backgroundColor: '#fff',
+        borderRadius: 12,
+        padding: 20,
+        width: '80%',
+        alignItems: 'center',
+    },
+    modalTitle: {
+        fontSize: 18,
+        fontWeight: '600',
+        marginBottom: 20,
+        textAlign: 'center',
+    },
+    modalButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
+    },
+    modalButton: {
+        flex: 1,
+        backgroundColor: '#000',
+        paddingVertical: 12,
+        marginHorizontal: 6,
+        borderRadius: 8,
+        alignItems: 'center',
+    },
+    modalCancel: {
+        backgroundColor: '#888',
+    },
+    modalButtonText: {
+        color: '#fff',
+        fontWeight: '500',
+        fontSize: 16,
+    },
+});

@@ -1,0 +1,14 @@
+guide for the wallet utilization:
+Wallet is the component of the app which let you to manage your credits.
+You can use it to add credits, view your balance, and track your transactions.
+To access the wallet, navigate to the "Wallet" section in the app navigator (the bottom stripe).
+In the wallet section, you will see your current balance displayed at the top.
+Then lower you can see your green points (coupons with which you can pay for services instead of credits, 1 gp = 1 cent).
+As last you can see your transaction history, which shows all the credits you have added or spent.
+Next to your current balance, you will find a button to add credits.
+Clicking this button will take you to a screen where you can choose the amount of credits you want to add and proceed with the payment.
+You can choose from predefined amounts or enter a custom amount.
+After selecting the amount, you will be prompted to enter your payment details.
+Once the payment is successful, your wallet balance will be updated accordingly.
+Remember to check your transaction history regularly to keep track of your spending and ensure all transactions are accurate.
+If you encounter any issues with your wallet, such as incorrect balances or failed transactions, please contact the customer service.

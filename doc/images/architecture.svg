@@ -1,0 +1,113 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+ <!-- Background -->
+ <!-- Title -->
+ <!-- Kotlin Backend -->
+ <!-- MQTT Broker -->
+ <!-- FastAPI Backend -->
+ <!-- MySQL Database -->
+ <!-- MongoDB Database -->
+ <!-- React Native Mobile App -->
+ <!-- IoT Devices -->
+ <!-- Connection Lines -->
+ <!-- Kotlin to MQTT -->
+ <!-- Kotlin to FastAPI -->
+ <!-- Kotlin to MySQL -->
+ <!-- Kotlin to React Native -->
+ <!-- FastAPI to MongoDB -->
+ <!-- MQTT to IoT Devices -->
+ <!-- Arrow marker definition -->
+ <defs>
+  <marker orient="auto" refY="3.5" refX="9" markerHeight="7" markerWidth="10" id="arrowhead">
+   <polygon id="svg_1" fill="#34495e" points="0 0, 10 3.5, 0 7"/>
+  </marker>
+ </defs>
+ <!-- Labels for connections -->
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_2" d="m0,2l800,0l0,600l-800,0l0,-600z" opacity="undefined" fill="#f8f9fa"/>
+  <text id="svg_3" fill="#2c3e50" font-weight="bold" font-size="24" font-family="Arial, sans-serif" text-anchor="middle" y="30" x="400">MobiShare Architecture</text>
+  <g id="kotlin-backend">
+   <rect id="svg_4" stroke-width="2" stroke="#6B46C1" fill="#7F52FF" rx="10" height="80" width="160" y="256" x="321"/>
+   <text id="svg_5" fill="white" font-weight="bold" font-size="14" font-family="Arial, sans-serif" text-anchor="middle" y="281" x="401">Spring-Boot Backend</text>
+   <!-- Kotlin logo simplified -->
+   <polygon id="svg_6" fill="#FF6B35" points="341,301 361,301 351,316 "/>
+   <polygon id="svg_7" fill="#FF6B35" points="351,301 371,301 361,316 "/>
+   <text id="svg_8" fill="white" font-size="12" font-family="Arial, sans-serif" y="314" x="387">Kotlin</text>
+  </g>
+  <g id="mqtt-broker">
+   <rect id="svg_9" stroke-width="2" stroke="#4A004A" fill="#660066" rx="10" height="80" width="120" y="80" x="87"/>
+   <text id="svg_10" fill="white" font-weight="bold" font-size="14" font-family="Arial, sans-serif" text-anchor="middle" y="105" x="147">MQTT Broker</text>
+   <!-- MQTT icon -->
+   <circle id="svg_11" fill="#FF6B35" r="8" cy="135" cx="132"/>
+   <circle id="svg_12" fill="#FF6B35" r="8" cy="135" cx="147"/>
+   <circle id="svg_13" fill="#FF6B35" r="8" cy="135" cx="162"/>
+   <line id="svg_14" stroke-width="2" stroke="white" y2="135" x2="147" y1="135" x1="132"/>
+   <line id="svg_15" stroke-width="2" stroke="white" y2="135" x2="162" y1="135" x1="147"/>
+  </g>
+  <g id="fastapi-backend">
+   <rect id="svg_16" stroke-width="2" stroke="#00796B" fill="#009688" rx="10" height="80" width="160" y="80" x="580"/>
+   <text id="svg_17" fill="white" font-weight="bold" font-size="14" font-family="Arial, sans-serif" text-anchor="middle" y="105" x="660">FastAPI Backend</text>
+   <!-- Python logo simplified -->
+   <circle id="svg_18" fill="#3776AB" r="12" cy="135" cx="640"/>
+   <circle id="svg_19" fill="#FFD43B" r="3" cy="130" cx="650"/>
+   <circle id="svg_20" fill="#FFD43B" r="3" cy="140" cx="650"/>
+   <text id="svg_21" fill="white" font-size="12" font-family="Arial, sans-serif" y="138" x="670">Python</text>
+  </g>
+  <g id="mysql-db">
+   <rect id="svg_22" stroke-width="2" stroke="#336791" fill="#4479A1" rx="10" height="80" width="160" y="424" x="319"/>
+   <text id="svg_23" fill="white" font-weight="bold" font-size="14" font-family="Arial, sans-serif" text-anchor="middle" y="449" x="399">MySQL Database</text>
+   <!-- MySQL dolphin simplified -->
+   <ellipse id="svg_24" fill="#F29111" ry="10" rx="15" cy="479" cx="379"/>
+   <circle id="svg_25" fill="white" r="2" cy="476" cx="374"/>
+   <path id="svg_26" fill="none" stroke-width="2" stroke="white" d="m394,479q10,-5 15,0"/>
+   <text id="svg_27" fill="white" font-size="12" font-family="Arial, sans-serif" y="482" x="419">SQL</text>
+  </g>
+  <g id="mongodb">
+   <rect id="svg_28" stroke-width="2" stroke="#3D8B40" fill="#47A248" rx="10" height="80" width="160" y="257" x="579"/>
+   <text id="svg_29" fill="white" font-weight="bold" font-size="14" font-family="Arial, sans-serif" text-anchor="middle" y="282" x="659">MongoDB</text>
+   <!-- MongoDB leaf -->
+   <path id="svg_30" fill="#F5F5F5" d="m639,307q10,-5 20,0q-10,10 -20,0"/>
+   <line id="svg_31" stroke-width="2" stroke="#F5F5F5" y2="317" x2="649" y1="302" x1="649"/>
+   <text id="svg_32" fill="white" font-size="12" font-family="Arial, sans-serif" y="315" x="669">NoSQL</text>
+  </g>
+  <g id="react-native">
+   <rect id="svg_33" stroke-width="2" stroke="#21A0C4" fill="#61DAFB" rx="10" height="80" width="160" y="74" x="319"/>
+   <text id="svg_34" fill="#2c3e50" font-weight="bold" font-size="14" font-family="Arial, sans-serif" text-anchor="middle" y="91" x="399">React Native</text>
+   <text id="svg_35" fill="#2c3e50" font-size="12" font-family="Arial, sans-serif" text-anchor="middle" y="103" x="399">Mobile App</text>
+   <!-- React logo -->
+   <circle id="svg_36" stroke-width="2" stroke="#2c3e50" fill="none" r="15" cy="134" cx="399"/>
+   <ellipse id="svg_37" stroke-width="2" stroke="#2c3e50" fill="none" ry="10" rx="25" cy="134" cx="399"/>
+   <ellipse id="svg_38" stroke-width="2" stroke="#2c3e50" fill="none" ry="25" rx="10" cy="134" cx="399"/>
+   <circle id="svg_39" fill="#2c3e50" r="3" cy="134" cx="399"/>
+  </g>
+  <g id="iot-devices">
+   <rect id="svg_40" stroke-width="2" stroke="#E55A2B" fill="#FF6B35" rx="10" height="80" width="120" y="263" x="82"/>
+   <text id="svg_41" fill="white" font-weight="bold" font-size="14" font-family="Arial, sans-serif" text-anchor="middle" y="288" x="142">Vehicles</text>
+   <!-- Device icons -->
+   <rect id="svg_42" fill="white" rx="2" height="20" width="15" y="308" x="117"/>
+   <rect id="svg_43" fill="white" rx="2" height="20" width="15" y="308" x="137"/>
+   <rect id="svg_44" fill="white" rx="2" height="20" width="15" y="308" x="157"/>
+   <circle id="svg_45" fill="#FF6B35" r="2" cy="313" cx="124"/>
+   <circle id="svg_46" fill="#FF6B35" r="2" cy="313" cx="144"/>
+   <circle id="svg_47" fill="#FF6B35" r="2" cy="313" cx="164"/>
+  </g>
+  <line transform="rotate(38.7742, 262.965, 209.431)" id="svg_48" marker-end="url(#arrowhead)" stroke-width="2" stroke="#34495e" y2="209.43107" x2="211.00875" y1="209.43107" x1="314.92168"/>
+  <path transform="rotate(39.6244, 267.821, 213.251)" id="svg_49" d="m220.83718,213.25133l93.9677,0" marker-end="url(#arrowhead)" opacity="undefined" stroke-width="2" stroke="#34495e"/>
+  <line transform="rotate(-45, 532, 209)" id="svg_50" marker-end="url(#arrowhead)" stroke-width="2" stroke="#34495e" y2="209" x2="582" y1="209" x1="482"/>
+  <line transform="rotate(-45.6296, 528, 215)" id="svg_51" marker-end="url(#arrowhead)" stroke-width="2" stroke="#34495e" y2="215" x2="476" y1="215" x1="580"/>
+  <line id="svg_52" marker-end="url(#arrowhead)" stroke-width="2" stroke="#34495e" y2="250" x2="400" y1="160" x1="400"/>
+  <line id="svg_53" marker-end="url(#arrowhead)" stroke-width="2" stroke="#34495e" y2="160" x2="400" y1="250" x1="400"/>
+  <line id="svg_56" marker-end="url(#arrowhead)" stroke-width="2" stroke="#34495e" y2="250" x2="660" y1="160" x1="660"/>
+  <line id="svg_57" marker-end="url(#arrowhead)" stroke-width="2" stroke="#34495e" y2="155" x2="660" y1="245" x1="660"/>
+  <line id="svg_58" marker-end="url(#arrowhead)" stroke-width="2" stroke="#34495e" y2="256" x2="148" y1="166" x1="148"/>
+  <line id="svg_59" marker-end="url(#arrowhead)" stroke-width="2" stroke="#34495e" y2="158" x2="148" y1="248" x1="148"/>
+  <text id="svg_60" fill="#7f8c8d" font-size="10" font-family="Arial, sans-serif" y="199" x="259">MQTT</text>
+  <text id="svg_61" fill="#7f8c8d" font-size="10" font-family="Arial, sans-serif" y="202" x="488">REST API</text>
+  <text id="svg_62" fill="#7f8c8d" font-size="10" font-family="Arial, sans-serif" y="207" x="339">HTTP/REST</text>
+  <text id="svg_63" fill="#7f8c8d" font-size="10" font-family="Arial, sans-serif" y="380" x="420">Query</text>
+  <text id="svg_64" fill="#7f8c8d" font-size="10" font-family="Arial, sans-serif" y="206" x="673">Query</text>
+  <text id="svg_65" fill="#7f8c8d" font-size="10" font-family="Arial, sans-serif" y="207" x="103">MQTT</text>
+  <line id="svg_66" marker-end="url(#arrowhead)" stroke-width="2" stroke="#34495e" y2="331" x2="402" y1="421" x1="402"/>
+  <line id="svg_67" marker-end="url(#arrowhead)" stroke-width="2" stroke="#34495e" y2="431" x2="403" y1="341" x1="403"/>
+ </g>
+</svg>

@@ -1,0 +1,335 @@
+openapi: 3.1.0
+info:
+  title: MobiShare AI
+  summary: All the AI functionalities available for Mobishare core services
+  version: 0.1.0
+
+paths:
+  /face_recognition/register:
+    post:
+      tags:
+        - Face recognition
+      summary: Save Face Encoding
+      operationId: save_face_encoding_face_recognition_register_post
+      parameters:
+        - name: username
+          in: header
+          required: true
+          schema:
+            type: string
+            title: Username
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_save_face_encoding_face_recognition_register_post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+                title: Response Save Face Encoding Face Recognition Register Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+
+  /face_recognition/verify:
+    post:
+      tags:
+        - Face recognition
+      summary: Login With Face
+      operationId: login_with_face_face_recognition_verify_post
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_login_with_face_face_recognition_verify_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Login With Face Face Recognition Verify Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+
+  /feedback:
+    get:
+      tags:
+        - Smart Assistant
+      summary: Get Feedback By Parameter
+      operationId: get_feedback_by_parameter_feedback_get
+      parameters:
+        - name: rating
+          in: query
+          required: false
+          schema:
+            type: integer
+            title: Rating
+        - name: id_vehicle
+          in: query
+          required: false
+          schema:
+            type: integer
+            title: Id Vehicle
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Feedback'
+                title: Response Get Feedback By Parameter Feedback Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+        - Smart Assistant
+      summary: Delete Feedback
+      operationId: delete_feedback_feedback_delete
+      parameters:
+        - name: id_vehicle
+          in: query
+          required: false
+          schema:
+            type: integer
+            title: Id Vehicle
+        - name: token
+          in: query
+          required: true
+          schema:
+            type: string
+            title: Token
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+
+  /feedback/format:
+    post:
+      tags:
+        - Smart Assistant
+      summary: Format Feedback
+      operationId: format_feedback_feedback_format_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeedbackRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feedback'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+
+  /maintenance/plan:
+    post:
+      tags:
+        - Smart Assistant
+      summary: Generate Maintenance Plan
+      operationId: generate_maintenance_plan_maintenance_plan_post
+      parameters:
+        - name: token
+          in: query
+          required: true
+          schema:
+            type: string
+            title: Token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaintenancePlanRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+
+components:
+  schemas:
+    Body_login_with_face_face_recognition_verify_post:
+      properties:
+        image:
+          type: string
+          format: binary
+          title: Image
+      type: object
+      required:
+        - image
+      title: Body_login_with_face_face_recognition_verify_post
+
+    Body_save_face_encoding_face_recognition_register_post:
+      properties:
+        image:
+          type: string
+          format: binary
+          title: Image
+      type: object
+      required:
+        - image
+      title: Body_save_face_encoding_face_recognition_register_post
+
+    Feedback:
+      properties:
+        _id:
+          anyOf:
+            - $ref: '#/components/schemas/PydanticObjectId'
+            - type: 'null'
+          description: MongoDB document ObjectID
+        id_vehicle:
+          type: integer
+          title: Id Vehicle
+        rating:
+          type: integer
+          title: Rating
+        bullet_points:
+          items:
+            type: string
+          type: array
+          title: Bullet Points
+      type: object
+      required:
+        - id_vehicle
+        - rating
+        - bullet_points
+      title: Feedback
+      example:
+        bullet_points:
+          - bullet1
+          - bullet2
+          - bullet3
+        id_vehicle: 357
+        rating: 3
+
+    FeedbackRequest:
+      properties:
+        feedback:
+          type: string
+          title: Feedback
+        id_vehicle:
+          type: integer
+          title: Id Vehicle
+      type: object
+      required:
+        - feedback
+        - id_vehicle
+      title: FeedbackRequest
+
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+
+    MaintenancePlanRequest:
+      properties:
+        id_vehicles:
+          items:
+            type: integer
+          type: array
+          title: Id Vehicles
+      type: object
+      required:
+        - id_vehicles
+      title: MaintenancePlanRequest
+
+    PlanSchema:
+      properties:
+        state:
+          type: integer
+          title: State
+        summary:
+          type: string
+          title: Summary
+        priorities:
+          items:
+            type: integer
+          type: array
+          title: Priorities
+      type: object
+      required:
+        - state
+        - summary
+        - priorities
+      title: PlanSchema
+
+    PydanticObjectId:
+      type: string
+      maxLength: 24
+      minLength: 24
+      pattern: ^[0-9a-f]{24}$
+      example: 5eb7cf5a86d9755df3a6c593
+
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+        - loc
+        - msg
+        - type
+      title: ValidationError

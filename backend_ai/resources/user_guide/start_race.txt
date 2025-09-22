@@ -1,0 +1,9 @@
+To start a race follow these steps:
+- go to a park. to find a park it is possible to use the HOME navigation button in the bottom left corner of the screen.
+  from the map choose a park and click on the navigator button to get directions to the park.
+- once in the park, look at a vehicle which has the dock's led light green.
+- tap on the ScanQR button next to the HOME.
+- scan the QR code on the vehicle.
+- in the landing page you can read the resume of the vehicle chosen.
+- by tapping on the "Avvia Corsa" button, blue on the bottom center of the screen, the dock will unlock the vehicle and u can start go wherever you want.
+- on the next screen you can see the resume of the ride till now.

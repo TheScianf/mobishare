@@ -1,0 +1,1555 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:9000
+  description: Generated server url
+paths:
+  /suspensions/byUser/{username}/last/isRejected:
+    put:
+      tags:
+      - suspension-controller
+      operationId: setUserLastSuspensionRejectedStatus
+      parameters:
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DAOSuspensionRejectStatus"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /managers/{id}/toggleAdmin:
+    put:
+      tags:
+      - manager-controller
+      operationId: toggleAdmin
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /vehicles/maintenance:
+    get:
+      tags:
+      - vehicle-controller
+      operationId: getActiveMaintenances
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DAOActiveMaintenance"
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+    post:
+      tags:
+      - vehicle-controller
+      operationId: sendVehicleToMaintenance
+      parameters:
+      - name: vehicleId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: description
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /vehicles/maintenance/end:
+    post:
+      tags:
+      - vehicle-controller
+      operationId: endingVehicleMaintenance
+      parameters:
+      - name: vehicleId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: parkId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /race:
+    post:
+      tags:
+      - race-controller
+      operationId: newRace
+      parameters:
+      - name: vehicleId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: username
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: date-time
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "405":
+          description: Vehicle doesn't exist
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /race/end:
+    post:
+      tags:
+      - race-controller
+      operationId: endRace
+      parameters:
+      - name: vehicleId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: username
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: start
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: OK
+        "402":
+          description: User is suspended
+          content:
+            application/text:
+              schema: {}
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "409":
+          description: Vehicle not parked in the dock
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /parks/{parkId}/vehicle:
+    post:
+      tags:
+      - park-controller
+      operationId: addVehicle
+      parameters:
+      - name: parkId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: vehicleType
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "404":
+          description: Dock non trovata
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /parks/vehicles/move:
+    post:
+      tags:
+      - park-controller
+      operationId: getVehicles
+      parameters:
+      - name: vehicleIds
+        in: query
+        required: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: parkId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Not enough docks
+          content:
+            application/text:
+              schema: {}
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /managers:
+    get:
+      tags:
+      - manager-controller
+      operationId: getAllManagers
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DAOManagerOnlyWithParkCount"
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+    post:
+      tags:
+      - manager-controller
+      operationId: addManager
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DAOManagerInsert"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /customers/{username}/wallet/recharge:
+    post:
+      tags:
+      - customer-controller
+      operationId: rechargeWallet
+      parameters:
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: euro
+        in: query
+        required: true
+        schema:
+          type: number
+          format: float
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /customers/{username}/feedback:
+    post:
+      tags:
+      - customer-controller
+      operationId: newFeedback
+      parameters:
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: text
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: vehicleId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /auth/register:
+    post:
+      tags:
+      - auth-controller
+      operationId: customerRegister
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DAORegisterRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        "400":
+          description: Violazione di un vincolo nella base di dati
+          content:
+            application/text:
+              schema: {}
+        "409":
+          description: Username già in uso
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /auth/login:
+    post:
+      tags:
+      - auth-controller
+      operationId: customerLogin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DAOLoginRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        "400":
+          description: Sintassi dell'input non valida
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /vehicles:
+    get:
+      tags:
+      - vehicle-controller
+      operationId: getAll
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DAOVehicleOnly"
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /vehicles/{vehicleId}/available:
+    get:
+      tags:
+      - vehicle-controller
+      operationId: isVehicleAvailable
+      parameters:
+      - name: vehicleId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/DAOVehicleWithPrice"
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "405":
+          description: Vehicle doesn't exist
+          content:
+            application/text:
+              schema: {}
+        "406":
+          description: Vehicle isn' available
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /suspensions:
+    get:
+      tags:
+      - suspension-controller
+      operationId: getAll_1
+      parameters:
+      - name: active
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DAOCustomerWithSuspension"
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /suspensions/byUser/{username}/suspended-permanently:
+    get:
+      tags:
+      - suspension-controller
+      operationId: isPermanentSuspended
+      parameters:
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: boolean
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /parks:
+    get:
+      tags:
+      - park-controller
+      operationId: getParks
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DAOParkWithIdAndName"
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /parks/{parkId}/vehicles:
+    get:
+      tags:
+      - park-controller
+      operationId: getVehiclesByPark
+      parameters:
+      - name: parkId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DAOVehicleWithStatus"
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "404":
+          description: Parcheggio non trovato
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /parks/{parkId}/report:
+    get:
+      tags:
+      - park-controller
+      operationId: getReportAI
+      parameters:
+      - name: parkId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/DAOParkReportAI"
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /parks/vehiclesWithStatusAndReports:
+    get:
+      tags:
+      - park-controller
+      summary: "Get parks with vehicles, status and reports"
+      description: "Returns a list of parks with their docks and vehicles information including status and reports. For managers, returns only their assigned parks. For admins, returns all parks."
+      operationId: getVehicles_1
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DAOParkWithVehicles"
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "404":
+          description: Username non trovato tra i Customer
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /parks/info:
+    get:
+      tags:
+      - park-controller
+      operationId: getParksInfo
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DAOParkWithVehicleTypeInfo"
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /customers/{username}:
+    get:
+      tags:
+      - customer-controller
+      operationId: getCustomer
+      parameters:
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/DAOCustomerOnlyNoPassword"
+        "403":
+          description: Accesso negato per la risorsa richiesta in quanto non posseduta
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /customers/{username}/transactions/last:
+    get:
+      tags:
+      - customer-controller
+      operationId: getLastTransactionByUser
+      parameters:
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/DAOTransactionOnly"
+        "403":
+          description: Accesso negato per la risorsa richiesta in quanto non posseduta
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /customers/{username}/suspansions:
+    get:
+      tags:
+      - customer-controller
+      operationId: getSuspensionByUser
+      parameters:
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DAOActiveSuspensionOnly"
+        "403":
+          description: Accesso negato per la risorsa richiesta in quanto non posseduta
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /customers/{username}/races:
+    get:
+      tags:
+      - customer-controller
+      operationId: getRacesByUser
+      parameters:
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DAORaceOnly"
+        "403":
+          description: Accesso negato per la risorsa richiesta in quanto non posseduta
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /customers/{username}/payments:
+    get:
+      tags:
+      - customer-controller
+      operationId: getPaymentsByCustomer
+      parameters:
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DAOTransactionOnly"
+        "403":
+          description: Accesso negato per la risorsa richiesta in quanto non posseduta
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /customers/{username}/greenPoints:
+    get:
+      tags:
+      - customer-controller
+      operationId: getGreenPointsByCustomer
+      parameters:
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: integer
+                format: int32
+        "403":
+          description: Accesso negato per la risorsa richiesta in quanto non posseduta
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /customers/{username}/credit:
+    get:
+      tags:
+      - customer-controller
+      operationId: getCreditByCustomer
+      parameters:
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: number
+                format: float
+        "403":
+          description: Accesso negato per la risorsa richiesta in quanto non posseduta
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /auth/token-check:
+    get:
+      tags:
+      - auth-controller
+      operationId: tokenCheck
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /auth/suspended-login:
+    get:
+      tags:
+      - auth-controller
+      operationId: suspendedLogin
+      parameters:
+      - name: permanently
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /auth/manager-login:
+    get:
+      tags:
+      - auth-controller
+      operationId: managerLogin
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /auth/admin-login:
+    get:
+      tags:
+      - auth-controller
+      operationId: adminLogin
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /:
+    get:
+      tags:
+      - main-controller
+      operationId: index
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+  /managers/{id}:
+    delete:
+      tags:
+      - manager-controller
+      operationId: deleteManager
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: substitutorId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Accesso negato per il ruolo fornito
+          content:
+            application/text:
+              schema: {}
+        "500":
+          description: Errore interno del server
+          content:
+            application/text:
+              schema: {}
+components:
+  schemas:
+    DAOSuspensionRejectStatus:
+      required:
+      - isRejected
+      type: object
+      properties:
+        isRejected:
+          type: boolean
+    DAOManagerInsert:
+      required:
+      - admin
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          maxLength: 2147483647
+          minLength: 8
+          type: string
+        admin:
+          type: boolean
+    DAORegisterRequest:
+      required:
+      - cf
+      - email
+      - gender
+      - name
+      - password
+      - surname
+      - username
+      type: object
+      properties:
+        username:
+          maxLength: 50
+          minLength: 4
+          type: string
+        password:
+          maxLength: 2147483647
+          minLength: 8
+          type: string
+        name:
+          maxLength: 50
+          minLength: 4
+          type: string
+        surname:
+          maxLength: 50
+          minLength: 4
+          type: string
+        gender:
+          pattern: "[MFX]"
+          type: string
+        cf:
+          maxLength: 16
+          minLength: 16
+          type: string
+        email:
+          type: string
+    DAOLoginRequest:
+      required:
+      - password
+      - username
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    DAOVehicleOnly:
+      required:
+      - id
+      - immissionDate
+      - vehicleType
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        immissionDate:
+          type: string
+          format: date
+        dismissionDate:
+          type: string
+          format: date
+        vehicleType:
+          type: string
+    DAOVehicleWithPrice:
+      required:
+      - constantPrice
+      - id
+      - minutePrice
+      - vehicleType
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        vehicleType:
+          type: string
+        constantPrice:
+          type: number
+          format: float
+        minutePrice:
+          type: number
+          format: float
+    DAOActiveMaintenance:
+      required:
+      - description
+      - idMaintenance
+      - start
+      - vehicle
+      type: object
+      properties:
+        idMaintenance:
+          type: integer
+          format: int32
+        vehicle:
+          $ref: "#/components/schemas/DAOVehicleOnly"
+        description:
+          type: string
+        start:
+          type: string
+          format: date
+    DAOCustomerWithSuspension:
+      required:
+      - email
+      - name
+      - paid
+      - start
+      - surname
+      - username
+      - value
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+        surname:
+          type: string
+        start:
+          type: integer
+          format: int64
+        end:
+          type: integer
+          format: int64
+        value:
+          type: number
+          format: float
+        paid:
+          type: boolean
+    DAOParkWithIdAndName:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+    DAOVehicleWithStatus:
+      required:
+      - id
+      - immissionDate
+      - status
+      - vehicleType
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        immissionDate:
+          type: string
+          format: date
+        dismissionDate:
+          type: string
+          format: date
+        vehicleType:
+          type: string
+        status:
+          type: string
+          enum:
+          - AVAILABLE
+          - NOT_AVAILABLE
+          - UNDER_MAINTENANCE
+          - ABANDONED
+          - DISABLED
+    DAOParkReportAI:
+      required:
+      - priorities
+      - state
+      - summary
+      type: object
+      properties:
+        state:
+          type: integer
+          format: int32
+        summary:
+          type: string
+        priorities:
+          type: array
+          items:
+            type: integer
+            format: int32
+    DAOCustomerReportOnly:
+      required:
+      - description
+      - time
+      type: object
+      properties:
+        time:
+          type: string
+          format: date-time
+        description:
+          type: string
+        customer:
+          type: string
+    DAODockWithIdVehicle:
+      required:
+      - number
+      type: object
+      properties:
+        number:
+          type: integer
+          format: int32
+        idVehicle:
+          type: integer
+          format: int32
+    DAOParkWithVehicles:
+      required:
+      - dockCount
+      - docks
+      - id
+      - name
+      - vehicles
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        dockCount:
+          type: integer
+          format: int32
+        vehicles:
+          type: array
+          items:
+            $ref: "#/components/schemas/DAOVehicleSmallWithStatus"
+        docks:
+          type: array
+          items:
+            $ref: "#/components/schemas/DAODockWithIdVehicle"
+    DAOSensorReportOnly:
+      required:
+      - time
+      - value
+      type: object
+      properties:
+        time:
+          type: string
+          format: date-time
+        value:
+          type: number
+          format: float
+    DAOVehicleSmallWithStatus:
+      required:
+      - customerReports
+      - id
+      - sensorReports
+      - status
+      - vehicleType
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        vehicleType:
+          type: string
+        status:
+          type: boolean
+        sensorReports:
+          type: array
+          items:
+            $ref: "#/components/schemas/DAOSensorReportOnly"
+        customerReports:
+          type: array
+          items:
+            $ref: "#/components/schemas/DAOCustomerReportOnly"
+    DAOParkWithVehicleTypeInfo:
+      required:
+      - bikeCount
+      - ebikeCount
+      - id
+      - latitude
+      - longitude
+      - name
+      - scooterCount
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        latitude:
+          type: number
+          format: float
+        longitude:
+          type: number
+          format: float
+        bikeCount:
+          type: integer
+          format: int32
+        eBikeCount:
+          type: integer
+          format: int32
+          writeOnly: true
+        scooterCount:
+          type: integer
+          format: int32
+        ebikeCount:
+          type: integer
+          format: int32
+    DAOManagerOnlyWithParkCount:
+      required:
+      - admin
+      - email
+      - id
+      - parkCount
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        email:
+          type: string
+        admin:
+          type: boolean
+        parkCount:
+          type: integer
+          format: int32
+    DAOCustomerOnlyNoPassword:
+      required:
+      - cf
+      - email
+      - gender
+      - name
+      - surname
+      - username
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+        surname:
+          type: string
+        gender:
+          type: string
+        cf:
+          type: string
+    DAOTransactionOnly:
+      required:
+      - id
+      - time
+      - value
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        value:
+          type: number
+          format: float
+        time:
+          type: string
+          format: date-time
+    DAOActiveSuspensionOnly:
+      required:
+      - customerUsername
+      - start
+      - value
+      type: object
+      properties:
+        customerUsername:
+          type: string
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+        value:
+          type: number
+          format: float
+    DAORaceOnly:
+      required:
+      - customer
+      - id
+      - minDuration
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/RaceId"
+        customer:
+          type: string
+        minDuration:
+          type: integer
+          format: int32
+    RaceId:
+      required:
+      - idCustomer
+      - idVehicle
+      - start
+      type: object
+      properties:
+        start:
+          type: string
+          format: date-time
+        idCustomer:
+          maxLength: 50
+          minLength: 0
+          type: string
+        idVehicle:
+          type: integer
+          format: int32
